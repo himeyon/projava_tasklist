@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 public class HomeRestController {
@@ -35,5 +36,16 @@ public class HomeRestController {
         final String id = UUID.randomUUID().toString().substring(0, 8);
         taskItems.add(new TaskItem(id, task, deadline, false));
         return "タスクを追加しました。";
+    }
+
+    /**
+     * タスクを一覧表示する.
+     * @return タスク一覧
+     */
+    @GetMapping("/restlist")
+    String listItems() {
+        return taskItems.stream()
+            .map(TaskItem::toString)
+            .collect(Collectors.joining(", "));
     }
 }
