@@ -1,2 +1,9 @@
 server:
   port: 8888
+
+spring:
+  datasource:
+    url:  jdbc:postgresql://localhost/projava
+    username: projava
+    password: pr0J@va
+    driverClassName: org.postgresql.Driver
