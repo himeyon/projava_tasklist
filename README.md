@@ -7,10 +7,13 @@
 書籍ではH2が利用されていますが、このリポジトリではPostgres14を利用しました。
 データベース作成用のDDLは以下のとおりです。
 
+```sql
 CREATE ROLE projava LOGIN
 PASSWORD 'pr0J@va'
 NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
+```
 
+```sql
 CREATE DATABASE projava
 WITH OWNER = projava
 ENCODING = 'UTF8'
@@ -19,3 +22,4 @@ LC_COLLATE = 'C'
 LC_CTYPE = 'C'
 TEMPLATE = 'template0'
 CONNECTION LIMIT = -1;
+```
