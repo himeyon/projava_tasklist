@@ -31,7 +31,7 @@ public class TaskListDao {
      */
     public void add(final TaskItem taskItem) {
         SqlParameterSource param = new BeanPropertySqlParameterSource(taskItem);
-        var insert = new SimpleJdbcInsert(jdbcTemplate).withTableName("tasklist");
+        var insert = new SimpleJdbcInsert(this.jdbcTemplate).withTableName("tasklist");
         insert.execute(param);
     }
 
@@ -41,12 +41,21 @@ public class TaskListDao {
      */
     public List<TaskItem> findAll() {
         final String query = "SELECT * FROM tasklist";
-        List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
+        List<Map<String, Object>> result = this.jdbcTemplate.queryForList(query);
         return result.stream()
             .map((Map<String, Object> row) -> new TaskItem(
                 row.get("id").toString(),
                 row.get("task").toString(),
                 row.get("deadline").toString(),
                 (Boolean) row.get("done"))).toList();
+    }
+
+    /**
+     * 削除処理
+     * @param id タスクID
+     * @return 件数
+     */
+    public int delete(final String id) {
+        return this.jdbcTemplate.update("DELETE FROM tasklist WHERE id = ?", id);
     }
 }

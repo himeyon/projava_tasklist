@@ -61,4 +61,15 @@ public class HomeController {
         taskListDao.add(item);
         return "redirect:/list";
     }
+
+    /**
+     * タスク削除.
+     * @param id タスクID
+     * @return タスク一覧(リダイレクト)
+     */
+    @GetMapping("/delete")
+    String deleteItem(@RequestParam("id") String id) {
+        taskListDao.delete(id);
+        return "redirect:/list";
+    }
 }
