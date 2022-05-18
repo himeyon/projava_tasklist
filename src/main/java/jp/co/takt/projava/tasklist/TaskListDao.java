@@ -35,6 +35,22 @@ public class TaskListDao {
         insert.execute(param);
     }
 
+
+    /**
+     * 更新処理
+     * @param taskItem タスク
+     * @return 件数
+     */
+    public int update(final TaskItem taskItem) {
+        return this.jdbcTemplate.update(
+            "UPDATE tasklist SET task = ?, deadline = ?, done = ? WHERE id = ?",
+            taskItem.task(),
+            taskItem.deadline(),
+            taskItem.done(),
+            taskItem.id()
+        );
+    }
+
     /**
      * 検索処理
      * @return タスクリスト

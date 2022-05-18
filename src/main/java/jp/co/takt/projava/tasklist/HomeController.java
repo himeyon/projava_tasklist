@@ -63,6 +63,24 @@ public class HomeController {
     }
 
     /**
+     * タスク更新処理
+     * @param id タスクID
+     * @param task タスク名
+     * @param deadline タスクの期限
+     * @param done タスクの完了
+     * @return 件数
+     */
+    @GetMapping("/update")
+    String updateItem(@RequestParam("id") final String id,
+                      @RequestParam("task") final String task,
+                      @RequestParam("deadline") final String deadline,
+                      @RequestParam("done") final boolean done) {
+
+        taskListDao.update(new TaskItem(id, task, deadline, done));
+        return "redirect:/list";
+    }
+
+    /**
      * タスク削除.
      * @param id タスクID
      * @return タスク一覧(リダイレクト)
